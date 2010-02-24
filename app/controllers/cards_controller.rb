@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class CardsController < AclController
   # GET /cards
   # GET /cards.xml
   def index
