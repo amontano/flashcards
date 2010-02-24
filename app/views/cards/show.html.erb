@@ -1,0 +1,13 @@
+<p>
+  <b>Question:</b>
+  <%=h @card.question %>
+</p>
+
+<p>
+  <b>Answer:</b>
+  <%=h @card.answer %>
+</p>
+
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

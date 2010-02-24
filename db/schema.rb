@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 90) do
+ActiveRecord::Schema.define(:version => 20100224141000) do
+
+  create_table "cards", :force => true do |t|
+    t.text     "question",   :null => false
+    t.text     "answer",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "languages", :force => true do |t|
     t.string  "title",                   :limit => 100,                    :null => false
