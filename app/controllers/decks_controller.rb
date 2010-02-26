@@ -1,4 +1,4 @@
-class DecksController < ApplicationController
+class DecksController < AclController
   # GET /decks
   # GET /decks.xml
   def index
