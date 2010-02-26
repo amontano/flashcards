@@ -7,7 +7,11 @@
   <b>Answer:</b>
   <%=h @card.answer %>
 </p>
+<p>
+	<b>Deck:</b>
+<%  deck = @card.deck %>
+	<%= link_to deck.title, deck %>
+</p>
 
-
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<%= link_to 'Edit', edit_deck_card_path(@deck, @card) %> |
+<%= link_to 'Back', deck_cards_path(@deck) %>

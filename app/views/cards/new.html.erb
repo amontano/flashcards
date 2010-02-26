@@ -1,6 +1,6 @@
 <h1>New card</h1>
 
-<% form_for(@card) do |f| %>
+<% form_for(:card, :url => deck_cards_path(@deck)) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -12,8 +12,12 @@
     <%= f.text_area :answer %>
   </p>
   <p>
+	<%= f.label :deck %><br />
+	<%= f.select :deck_id, @decks.collect{|d| [d.title, d.id]}, { :include_blank => false } %>
+  </p>
+  <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', cards_path %>
+<%= link_to 'Back', deck_cards_path(@deck) %>

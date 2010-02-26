@@ -3,4 +3,5 @@
 config/database.yml
 config/environments/quandu_*.rb
 doc/plugins/*
+doc/api/*
 public/javascripts/tiny_mce/

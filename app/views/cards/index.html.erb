@@ -4,19 +4,22 @@
   <tr>
     <th>Question</th>
     <th>Answer</th>
+    <th>Deck</th>
   </tr>
 
-<% @cards.each do |card| %>
+<% @cards.each do |card| 
+     deck = card.deck %>
   <tr>
     <td><%=h card.question %></td>
     <td><%=h card.answer %></td>
-    <td><%= link_to 'Show', card %></td>
-    <td><%= link_to 'Edit', edit_card_path(card) %></td>
-    <td><%= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to deck.title, deck %></td>
+    <td><%= link_to 'Show', deck_card_path(@deck, card) %></td>
+    <td><%= link_to 'Edit', edit_deck_card_path(@deck, card) %></td>
+    <td><%= link_to 'Destroy', deck_card_path(@deck, card), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New card', new_card_path %>
+<%= link_to 'New card', new_deck_card_path %>

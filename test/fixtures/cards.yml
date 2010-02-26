@@ -8,6 +8,8 @@ two:
   question: MyText
   answer: MyText
 
+
+
 # == Schema Information
 #
 # Table name: cards
@@ -17,5 +19,6 @@ two:
 #  answer     :text            default(""), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  deck_id    :integer(4)      default(1), not null
 #
 

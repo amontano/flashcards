@@ -1,8 +1,10 @@
 class CardsController < AclController
+  before_filter :get_deck
+  
   # GET /cards
   # GET /cards.xml
   def index
-    @cards = Card.all
+    @cards = @deck.cards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +26,8 @@ class CardsController < AclController
   # GET /cards/new
   # GET /cards/new.xml
   def new
-    @card = Card.new
+    @card = @deck.cards.new
+    @decks = Deck.find(:all, :order => 'title')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +38,7 @@ class CardsController < AclController
   # GET /cards/1/edit
   def edit
     @card = Card.find(params[:id])
+    @decks = Deck.find(:all, :order => 'title')
   end
 
   # POST /cards
@@ -45,9 +49,10 @@ class CardsController < AclController
     respond_to do |format|
       if @card.save
         flash[:notice] = 'Card was successfully created.'
-        format.html { redirect_to(@card) }
+        format.html { redirect_to(deck_card_path(@deck, @card)) }
         format.xml  { render :xml => @card, :status => :created, :location => @card }
       else
+        @decks = Deck.find(:all, :order => 'title')
         format.html { render :action => "new" }
         format.xml  { render :xml => @card.errors, :status => :unprocessable_entity }
       end
@@ -62,9 +67,10 @@ class CardsController < AclController
     respond_to do |format|
       if @card.update_attributes(params[:card])
         flash[:notice] = 'Card was successfully updated.'
-        format.html { redirect_to(@card) }
+        format.html { redirect_to(deck_card_path(@deck, @card)) }
         format.xml  { head :ok }
       else
+        @decks = Deck.find(:all, :order => 'title')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @card.errors, :status => :unprocessable_entity }
       end
@@ -78,8 +84,14 @@ class CardsController < AclController
     @card.destroy
 
     respond_to do |format|
-      format.html { redirect_to(cards_url) }
+      format.html { redirect_to(deck_cards_url(@deck)) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def get_deck
+    @deck = Deck.find(params[:deck_id])
   end
 end

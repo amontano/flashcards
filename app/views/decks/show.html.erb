@@ -1,0 +1,9 @@
+<p>
+  <b>Title:</b>
+  <%=h @deck.title %>
+</p>
+<p><b>Cards:</b>
+<%= @deck.cards.collect{|c| link_to(c.question, deck_card_path(@deck, c)) }.join(', ') %>
+</p>
+<%= link_to 'Edit', edit_deck_path(@deck) %> |
+<%= link_to 'Back', decks_path %>

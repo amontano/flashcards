@@ -7,6 +7,8 @@ class CardTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: cards
@@ -16,5 +18,6 @@ end
 #  answer     :text            default(""), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  deck_id    :integer(4)      default(1), not null
 #
 
