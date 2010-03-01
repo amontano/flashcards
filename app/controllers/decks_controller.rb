@@ -2,7 +2,7 @@ class DecksController < AclController
   # GET /decks
   # GET /decks.xml
   def index
-    @decks = Deck.all
+    @decks = Deck.all(:order => 'title')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,7 @@ class DecksController < AclController
   # GET /decks/new
   # GET /decks/new.xml
   def new
-    @deck = Deck.new
+    @deck = Deck.new(:title => 'Put title here')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,7 +58,6 @@ class DecksController < AclController
   # PUT /decks/1.xml
   def update
     @deck = Deck.find(params[:id])
-
     respond_to do |format|
       if @deck.update_attributes(params[:deck])
         flash[:notice] = 'Deck was successfully updated.'

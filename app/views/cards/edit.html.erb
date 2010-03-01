@@ -1,24 +1,11 @@
 <h1>Editing card</h1>
 
 <% form_for(:card, :url => deck_card_path(@deck, @card), :html =>{:method => :put}) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :question %><br />
-    <%= f.text_area :question %>
-  </p>
-  <p>
-    <%= f.label :answer %><br />
-    <%= f.text_area :answer %>
-  </p>
-  <p>
-	<%= f.label :deck %><br />
-	<%= f.select :deck_id, @decks.collect{|d| [d.title, d.id]}, { :include_blank => false } %>
-  </p>
+<%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', deck_card_path(@deck, @card) %> |
-<%= link_to 'Back', deck_cards_path(@deck) %>
+<%= link_to 'Back to card', deck_card_path(@deck, @card) %> |
+<%= link_to "Back to #{@deck.title}", deck_path(@deck) %>

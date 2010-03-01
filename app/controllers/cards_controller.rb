@@ -4,7 +4,7 @@ class CardsController < AclController
   # GET /cards
   # GET /cards.xml
   def index
-    @cards = @deck.cards
+    @card = @deck.cards.find(:first, :order => 'RAND()')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class CardsController < AclController
   # GET /cards/new.xml
   def new
     @card = @deck.cards.new
-    @decks = Deck.find(:all, :order => 'title')
+    @decks = Deck.all(:order => 'title')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +38,7 @@ class CardsController < AclController
   # GET /cards/1/edit
   def edit
     @card = Card.find(params[:id])
-    @decks = Deck.find(:all, :order => 'title')
+    @decks = Deck.all(:order => 'title')
   end
 
   # POST /cards
@@ -52,7 +52,7 @@ class CardsController < AclController
         format.html { redirect_to(deck_card_path(@deck, @card)) }
         format.xml  { render :xml => @card, :status => :created, :location => @card }
       else
-        @decks = Deck.find(:all, :order => 'title')
+        @decks = Deck.all(:order => 'title')
         format.html { render :action => "new" }
         format.xml  { render :xml => @card.errors, :status => :unprocessable_entity }
       end
@@ -63,11 +63,10 @@ class CardsController < AclController
   # PUT /cards/1.xml
   def update
     @card = Card.find(params[:id])
-
     respond_to do |format|
       if @card.update_attributes(params[:card])
         flash[:notice] = 'Card was successfully updated.'
-        format.html { redirect_to(deck_card_path(@deck, @card)) }
+        format.html { redirect_to(deck_card_url(@deck, @card)) }
         format.xml  { head :ok }
       else
         @decks = Deck.find(:all, :order => 'title')

@@ -3,7 +3,24 @@
   <%=h @deck.title %>
 </p>
 <p><b>Cards:</b>
-<%= @deck.cards.collect{|c| link_to(c.question, deck_card_path(@deck, c)) }.join(', ') %>
+<%= link_to 'Study cards', deck_cards_path(@deck) %>
 </p>
-<%= link_to 'Edit', edit_deck_path(@deck) %> |
-<%= link_to 'Back', decks_path %>
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+  </tr>
+<% @deck.cards.each do |card| %>
+  <tr>
+    <td><%=h card.question %></td>
+    <td><%=h card.answer %></td>
+    <td><%= link_to 'Show', deck_card_path(@deck, card) %></td>
+  </tr>
+<% end %>
+</table>
+<p>
+<%= link_to 'New card', new_deck_card_path(@deck) %> |
+<%= link_to 'Edit deck', edit_deck_path(@deck) %> |
+<%= link_to 'Delete deck', @deck, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Back to all decks', decks_path %>
+</p>

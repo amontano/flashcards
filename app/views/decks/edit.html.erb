@@ -1,16 +1,10 @@
 <h1>Editing deck</h1>
 
 <% form_for(@deck) do |f| %>
-  <%= f.error_messages %>
-
+<%=  render :partial => 'form', :locals => {:form => f} %>
   <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
+<%=  f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @deck %> |
-<%= link_to 'Back', decks_path %>
+<%= link_to 'Back to deck', @deck %>

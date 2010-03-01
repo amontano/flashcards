@@ -1,17 +1,14 @@
-<p>
-  <b>Question:</b>
-  <%=h @card.question %>
+<h1>Random card</h1>
+<p><b>Question:</b><br/>
+<%= @card.question %>
 </p>
-
 <p>
   <b>Answer:</b>
   <%=h @card.answer %>
 </p>
+<p><%= link_to 'Next random card', deck_cards_path(@deck) %></p>
 <p>
-	<b>Deck:</b>
-<%  deck = @card.deck %>
-	<%= link_to deck.title, deck %>
-</p>
-
+<%= link_to "Back to #{@deck.title}", deck_path(@deck) %> |
 <%= link_to 'Edit', edit_deck_card_path(@deck, @card) %> |
-<%= link_to 'Back', deck_cards_path(@deck) %>
+<%= link_to 'Delete', deck_card_path(@deck, @card), :confirm => 'Are you sure?', :method => :delete %>
+</p>
