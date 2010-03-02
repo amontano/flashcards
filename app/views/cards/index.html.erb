@@ -2,7 +2,11 @@
 <p><b>Question:</b><br/>
 <%= @card.question %>
 </p>
-<p><%= link_to 'See answer', deck_card_path(@deck, @card) %></p>
+<div id="answer_div" style="display:none">
+</div>
+<div id="see_answer_div">
+<p><%= link_to_remote 'See answer', :url => deck_card_path(@deck, @card), :method => :get %></p>
+</div>
 <p>
 <%= link_to "Back to #{@deck.title}", deck_path(@deck) %>
 </p>

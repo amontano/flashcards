@@ -16,9 +16,16 @@ class CardsController < AclController
   # GET /cards/1.xml
   def show
     @card = Card.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html do
+        if request.xhr?
+          render :update do |page|
+            page.replace_html 'see_answer_div', ''
+            page.replace_html 'answer_div', :partial => 'show'
+            page['answer_div'].visual_effect :blind_down
+          end
+        end
+      end # show.html.erb
       format.xml  { render :xml => @card }
     end
   end

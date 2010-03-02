@@ -2,22 +2,25 @@
   <b>Title:</b>
   <%=h @deck.title %>
 </p>
-<p><b>Cards:</b>
-<%= link_to 'Study cards', deck_cards_path(@deck) %>
-</p>
-<table>
-  <tr>
-    <th>Question</th>
-    <th>Answer</th>
-  </tr>
-<% @deck.cards.each do |card| %>
-  <tr>
-    <td><%=h card.question %></td>
-    <td><%=h card.answer %></td>
-    <td><%= link_to 'Show', deck_card_path(@deck, card) %></td>
-  </tr>
+<% cards = @deck.cards
+   if !cards.empty? %>
+     <p><b>Cards:</b>
+<%=  link_to 'Study cards', deck_cards_path(@deck) %>
+     </p>
+     <table>
+       <tr>
+         <th>Question</th>
+         <th>Answer</th>
+       </tr>
+<%     cards.each do |card| %>
+       <tr>
+         <td><%=h card.question %></td>
+         <td><%=h card.answer %></td>
+         <td><%= link_to 'Show', deck_card_path(@deck, card) %></td>
+       </tr>
+<%     end %>
+     </table>
 <% end %>
-</table>
 <p>
 <%= link_to 'New card', new_deck_card_path(@deck) %> |
 <%= link_to 'Edit deck', edit_deck_path(@deck) %> |
