@@ -4,6 +4,14 @@
 </p>
 <p><%= link_to 'Next random card', deck_cards_path(@deck) %></p>
 <p>
-<%= link_to 'Edit', edit_deck_card_path(@deck, @card) %> |
-<%= link_to 'Delete', deck_card_path(@deck, @card), :confirm => 'Are you sure?', :method => :delete %>
+<% if authorized? hash_for_edit_deck_card_path
+	 previous = true %>
+<%=  link_to 'Edit', edit_deck_card_path(@deck, @card) %>
+<% else 
+     previous = false 
+   end 
+   authorized_only hash_for_deck_card_path(:action => 'destroy') do %>
+<%=  '|' if previous %>
+<%=  link_to 'Delete', deck_card_path(@deck, @card), :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
 </p>

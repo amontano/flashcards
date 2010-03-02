@@ -7,6 +7,7 @@
      <p><b>Cards:</b>
 <%=  link_to 'Study cards', deck_cards_path(@deck) %>
      </p>
+<%   authorized_only hash_for_edit_deck_card_path do %>
      <table>
        <tr>
          <th>Question</th>
@@ -20,10 +21,24 @@
        </tr>
 <%     end %>
      </table>
-<% end %>
+<%   end 
+end %>
 <p>
-<%= link_to 'New card', new_deck_card_path(@deck) %> |
-<%= link_to 'Edit deck', edit_deck_path(@deck) %> |
-<%= link_to 'Delete deck', @deck, :confirm => 'Are you sure?', :method => :delete %> |
+<% previous = false
+   authorized_only hash_for_new_deck_card_path do 
+	 previous = true %>
+<%=  link_to 'New card', new_deck_card_path(@deck) %>
+<% end
+   authorized_only hash_for_edit_deck_path do %>
+<%=  '|' if previous %>
+<%=  link_to 'Edit deck', edit_deck_path(@deck) %>
+<%   previous = true
+   end
+   authorized_only hash_for_deck_path(:action => 'destroy') do %>
+<%=  '|' if previous %>
+<%=  link_to 'Delete deck', @deck, :confirm => 'Are you sure?', :method => :delete %>
+<%   previous = true
+   end %>
+<%= '|' if previous %>
 <%= link_to 'Back to all decks', decks_path %>
 </p>

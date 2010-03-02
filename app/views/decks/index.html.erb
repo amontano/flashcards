@@ -13,6 +13,4 @@
 </table>
 
 <br />
-<% if logged_in? %>
-<%= link_to 'New deck', new_deck_path %>
-<% end %>
+<%= authorized_only(hash_for_new_deck_path) { link_to 'New deck', new_deck_path } %>
