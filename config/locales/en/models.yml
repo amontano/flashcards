@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+en:
+    activerecord:
+        # Model names will be kept in lower case. Invoke .capitalize or .titleize if you need them in uppercase.
+        models:
+            deck:
+                one: 'deck'
+                other: 'decks'
+            card:
+                one: 'card'
+                other: 'cards'
+        # Attribute names will be titleized.
+        attributes:
+            deck:
+                title: 'Name'
+            card:
+                question: 'Question'
+                answer: 'Answer'

@@ -1,17 +1,17 @@
 <p>
-  <b>Answer:</b>
+  <b><%= Card.human_attribute_name('answer').s %></b>
   <%=h @card.answer %>
 </p>
 <p><%= link_to 'Next random card', deck_cards_path(@deck) %></p>
 <p>
 <% if authorized? hash_for_edit_deck_card_path
 	 previous = true %>
-<%=  link_to 'Edit', edit_deck_card_path(@deck, @card) %>
+<%=  link_to ts('edit.this'), edit_deck_card_path(@deck, @card) %>
 <% else 
      previous = false 
    end 
    authorized_only hash_for_deck_card_path(:action => 'destroy') do %>
 <%=  '|' if previous %>
-<%=  link_to 'Delete', deck_card_path(@deck, @card), :confirm => 'Are you sure?', :method => :delete %>
+<%=  link_to ts('delete.this'), deck_card_path(@deck, @card), :confirm => te('delete.confirmation'), :method => :delete %>
 <% end %>
 </p>

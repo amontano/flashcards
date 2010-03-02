@@ -1,17 +1,17 @@
 <p>
-  <b>Title:</b>
+  <b><%= Deck.human_attribute_name('title').s %>:</b>
   <%=h @deck.title %>
 </p>
 <% cards = @deck.cards
    if !cards.empty? %>
-     <p><b>Cards:</b>
-<%=  link_to 'Study cards', deck_cards_path(@deck) %>
+     <p><b><%= Card.human_name(:count => :many) %>:</b>
+<%=  link_to ts('study.record', :what => Card.human_name(:count => :many)), deck_cards_path(@deck) %>
      </p>
 <%   authorized_only hash_for_edit_deck_card_path do %>
      <table>
        <tr>
-         <th>Question</th>
-         <th>Answer</th>
+         <th><%= Card.human_attribute_name('question').s %></th>
+         <th><%= Card.human_attribute_name('answer').s %></th>
        </tr>
 <%     cards.each do |card| %>
        <tr>
@@ -27,18 +27,18 @@ end %>
 <% previous = false
    authorized_only hash_for_new_deck_card_path do 
 	 previous = true %>
-<%=  link_to 'New card', new_deck_card_path(@deck) %>
+<%=  link_to ts('new.record', :what => Card.human_name(:count => 1)), new_deck_card_path(@deck) %>
 <% end
    authorized_only hash_for_edit_deck_path do %>
 <%=  '|' if previous %>
-<%=  link_to 'Edit deck', edit_deck_path(@deck) %>
+<%=  link_to ts('edit.record', :what => Deck.human_name(:count => 1)), edit_deck_path(@deck) %>
 <%   previous = true
    end
    authorized_only hash_for_deck_path(:action => 'destroy') do %>
 <%=  '|' if previous %>
-<%=  link_to 'Delete deck', @deck, :confirm => 'Are you sure?', :method => :delete %>
+<%=  link_to ts('delete.this', :what => Deck.human_name(:count => 1)), @deck, :confirm => te('delete.confirmation'), :method => :delete %>
 <%   previous = true
    end %>
 <%= '|' if previous %>
-<%= link_to 'Back to all decks', decks_path %>
+<%= link_to ts('back.to', :what => t(:all, :what => Deck.human_name(:count => :many))), decks_path %>
 </p>

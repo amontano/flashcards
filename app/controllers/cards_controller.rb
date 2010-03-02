@@ -22,7 +22,7 @@ class CardsController < AclController
           render :update do |page|
             page.replace_html 'see_answer_div', ''
             page.replace_html 'answer_div', :partial => 'show'
-            page['answer_div'].visual_effect :blind_down
+            page['answer_div'].visual_effect :appear, :duration => 1
           end
         end
       end # show.html.erb
